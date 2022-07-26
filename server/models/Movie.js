@@ -1,9 +1,9 @@
 const { Schema } = require('mongoose');
 
 const movieSchema = new Schema({
-    genres: [
+    genre_ids: [
         {
-            type: String,
+            type: Number,
         },
     ],
     overview: {
@@ -22,6 +22,13 @@ const movieSchema = new Schema({
     },
     votes: {
         type: Number
+    },
+    movieId: {
+        type: String,
+        required: true
+    },
+    poster_path: {
+        type: String
     }
 });
 

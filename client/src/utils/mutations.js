@@ -30,7 +30,25 @@ export const SAVE_MOVIE = gql`
         saveMovie(input: $input) {
             username
             savedMovies {
-                
+                genre_ids
+                overview
+                title
+                runtime
+                rating
+                votes
+                movieId
+                poster_path
+            }
+        }
+    }
+`;
+
+export const REMOVE_MOVIE = gql`
+    mutation removeMovie($movieId: ID!) {
+        removeMovie(movieId: movieId) {
+            username
+            savedMovies {
+                movieId
             }
         }
     }
