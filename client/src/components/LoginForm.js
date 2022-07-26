@@ -13,7 +13,7 @@ const LoginForm = () => {
     const [loginUser] = useMutation(LOGIN_USER);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.targer;
+        const { name, value } = event.target;
         setUserFormData({ ...userFormData, [name]: value });
     };
 
@@ -21,7 +21,7 @@ const LoginForm = () => {
         event.preventDefault();
 
         const form = event.currentTarget;
-        if (form.checkValididty() === false) {
+        if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -46,7 +46,7 @@ const LoginForm = () => {
 
     return (
         <>
-            <Form naValidate validated={validated} onSubmit={handleFormSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
                 <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
                     Something went wrong with your login credentials!
                 </Alert>

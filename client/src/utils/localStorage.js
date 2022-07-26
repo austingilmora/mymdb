@@ -1,4 +1,4 @@
-export const getSavedMoviesIds = () => {
+export const getSavedMovieIds = () => {
     const savedMovieIds = localStorage.getItem('saved_movies')
         ? JSON.parse(localStorage.getItem('saved_movies'))
         : [];

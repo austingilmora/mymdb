@@ -19,7 +19,7 @@ const typeDefs = gql`
         overview: String
         title: String
         runtime: Int
-        rating: Int
+        rating: Float
         votes: Int
         movieId: ID
         poster_path: String
@@ -30,7 +30,7 @@ const typeDefs = gql`
         overview: String
         title: String
         runtime: Int
-        rating: Int
+        rating: Float
         votes: Int
         movieId: ID
         poster_path: String

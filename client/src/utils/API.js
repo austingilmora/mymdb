@@ -1,4 +1,3 @@
-const APIKey = process.env.REACT_APP_API_KEY
 
 export const getMe = (token) => {
     return fetch('/api/users/me', {
@@ -30,7 +29,7 @@ export const loginUser = (userData) => {
 };
 
 export const saveMovie = (movieData, token) => {
-    return fetch('api/users', {
+    return fetch('/api/users', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -50,5 +49,5 @@ export const deleteMovie = (movieId, token) => {
 }
   
 export const searchTMDB = (query) => {
-    return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&query=${query}`);
+    return fetch(`https://api.themoviedb.org/3/search/movie?api_key=002c2a17a597cc6a83a3b2aaafe2dd44&query=${query}`);
 }

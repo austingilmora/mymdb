@@ -8,8 +8,8 @@ import Auth from '../utils/auth';
 import { removeMovieId } from '../utils/localStorage';
 
 const SavedMovies = () => {
-    const userDataLength = Object.keys(userData).length;
-
+    // const userDataLength = Object.keys(userData).length;
+    
     const {loading, data} = useQuery(GET_ME);
     const [removeMovie, {error}] = useMutation(REMOVE_MOVIE);
 
@@ -28,12 +28,13 @@ const SavedMovies = () => {
             });
 
             removeMovieId(movieId);
+
         } catch (err) {
             console.error(err);
         }
     };
 
-    if(!userDataLength) {
+    if(!Object.keys(userData).length) {
         return <h2>LOADING...</h2>
     }
 
@@ -48,12 +49,12 @@ const SavedMovies = () => {
                 <h2>
                     {userData.savedMovies.length
                     ? `Viewing ${userData.savedMovies.length} saved ${userData.savedMovies.length === 1 ? 'movie' : 'movies'}:`
-                    : "You haven't saved any books yet!"}
+                    : "You haven't saved any movies yet!"}
                 </h2>
                 <CardColumns>
                     {userData.savedMovies.map((movie) => {
                         return (
-                            <Card key={movie.id} border='dark'>
+                            <Card key={movie.movieId} border='dark'>
                                 {movie.poster_path ? <Card.Img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={`The poster for ${movie.title}`} variant='top' /> : null }
                                 <Card.Body>
                                     <Card.Title>{movie.title}</Card.Title>

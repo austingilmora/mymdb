@@ -78,7 +78,7 @@ const SignupForm = () => {
                         type='password'
                         placeholder='Your password'
                         name='password'
-                        onchange={handleInputChange}
+                        onChange={handleInputChange}
                         value={userFormData.password}
                         required
                     />

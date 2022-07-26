@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { useQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { SAVE_MOVIE } from '../utils/mutations';
 import { searchTMDB } from '../utils/API';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
-const REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
 
 const SearchMovies = () => {
     const [saveMovie, {error}] = useMutation(SAVE_MOVIE);
     const [searchedMovies, setSearchedMovies] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const [noMovies, setNoMovies] = useState(false);
 
     const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
 
@@ -29,22 +29,29 @@ const SearchMovies = () => {
 
         try {
             const response = await searchTMDB(searchInput);
+            
 
             if (!response.ok) {
                 throw new Error("We can't seem to find a movie with that title...");
             }
+            
+            const { results }  = await response.json();
 
-            const { items } = await response.json();
-
-            const movieData = items.map((movie) => ({
+            const movieData = results.map((movie) => ({
                 movieId: movie.id,
                 genre_ids: movie.genre_ids,
-                overview: movie.overview,
+                overview: movie.overview || ['No description to display'],
                 title: movie.title,
                 rating: movie.vote_average,
                 votes: movie.vote_count,
                 poster_path: movie.poster_path
             }));
+
+            if(results.length === 0) {
+                setNoMovies(true)
+            } else {
+                setNoMovies(false)
+            }
 
             setSearchedMovies(movieData);
             setSearchInput('')
@@ -54,6 +61,7 @@ const SearchMovies = () => {
     };
 
     const handleSaveMovie = async (movieId) => {
+
         const movieToSave = searchedMovies.find((movie) => movie.id === movieId);
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -94,6 +102,7 @@ const SearchMovies = () => {
                                 <Button type='submit' variant='success' size='lg'>
                                     Submit Search
                                 </Button>
+                            </Col>
                         </Form.Row>
                     </Form>
                 </Container>
@@ -105,20 +114,25 @@ const SearchMovies = () => {
                         ? `Viewing ${searchedMovies.length} results:`
                         : 'Search for a Movie to begin'}
                 </h2>
+                <h4>
+                    {noMovies ? 'No movies found with that title' : ''}
+                </h4>
                 <CardColumns>
                     {searchedMovies.map((movie) => {
                         return (
                             <Card key={movie.movieId} border='dark'>
                                 {movie.poster_path ? (
-                                    <Card.img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={`The poster for ${movie.title}`} variant='top' />
+                                    <Card.Img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={`The poster for ${movie.title}`} variant='top' />
                                 ) : null}
                                 <Card.Body>
                                     <Card.Title>{movie.title}</Card.Title>
+                                    <p className='small'>Rating: {movie.rating} /10</p>
+                                    <p className='small'>Votes: {movie.votes}</p>
                                     <p className='small'>Description: {movie.overview}</p>
                                     {Auth.loggedIn() && (
                                         <Button
                                             disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.id)}
-                                            classname='btn-block btn-info'
+                                            className='btn-block btn-info'
                                             onClick={() => handleSaveMovie(movie.id)}>
                                                 {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.id)
                                                 ? 'This movie is already on your saved list!'

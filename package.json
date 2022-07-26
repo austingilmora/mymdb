@@ -1,7 +1,7 @@
 {
-  "dependencies": {
-    "apollo-server-express": "^3.10.0"
-  },
+  "name": "mymdb",
+  "version": "1.0.0",
+  "description": "",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -9,7 +9,13 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "cd client && npm run build"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "concurrently": "^7.3.0"
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.6.4"
   }
 }
