@@ -32,8 +32,7 @@ const SavedMovies = () => {
         } catch (err) {
             console.error(err);
         }
-        window.location.reload();
-        return false;
+        window.location.reload(false);
     };
 
     if(!Object.keys(userData).length) {
