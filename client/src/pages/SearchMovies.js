@@ -9,7 +9,7 @@ import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
 
 const SearchMovies = () => {
-    const [saveMovie, {error}] = useMutation(SAVE_MOVIE);
+    const [saveMovie] = useMutation(SAVE_MOVIE);
     const [searchedMovies, setSearchedMovies] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [noMovies, setNoMovies] = useState(false);
@@ -46,6 +46,7 @@ const SearchMovies = () => {
                 votes: movie.vote_count,
                 poster_path: movie.poster_path
             }));
+            console.log(movieData);
 
             if(results.length === 0) {
                 setNoMovies(true)
@@ -62,8 +63,8 @@ const SearchMovies = () => {
 
     const handleSaveMovie = async (movieId) => {
 
-        const movieToSave = searchedMovies.find((movie) => movie.id === movieId);
-
+        const movieToSave = searchedMovies.find((movie) => movie.movieId === movieId);
+        
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if(!token) {
@@ -75,7 +76,8 @@ const SearchMovies = () => {
                 variables: { input: movieToSave }
             });
 
-            setSavedMovieIds([...savedMovieIds, movieToSave.id]);
+            setSavedMovieIds([...savedMovieIds, movieToSave.movieId]);
+            
         } catch (err) {
             console.error(err);
         }
@@ -111,7 +113,7 @@ const SearchMovies = () => {
             <Container>
                 <h2>
                     {searchedMovies.length
-                        ? `Viewing ${searchedMovies.length} results:`
+                        ? `Viewing ${searchedMovies.length} results:` 
                         : 'Search for a Movie to begin'}
                 </h2>
                 <h4>
@@ -126,15 +128,16 @@ const SearchMovies = () => {
                                 ) : null}
                                 <Card.Body>
                                     <Card.Title>{movie.title}</Card.Title>
+                                    <p className='small'>id: {movie.movieId}</p>
                                     <p className='small'>Rating: {movie.rating} /10</p>
                                     <p className='small'>Votes: {movie.votes}</p>
                                     <p className='small'>Description: {movie.overview}</p>
                                     {Auth.loggedIn() && (
                                         <Button
-                                            disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.id)}
+                                            disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
                                             className='btn-block btn-info'
-                                            onClick={() => handleSaveMovie(movie.id)}>
-                                                {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.id)
+                                            onClick={() => handleSaveMovie(movie.movieId)}>
+                                                {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)
                                                 ? 'This movie is already on your saved list!'
                                                 : 'Save this Movie for later!'
                                             }

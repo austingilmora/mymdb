@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_MOVIE } from '../utils/mutations';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
@@ -10,8 +10,8 @@ import { removeMovieId } from '../utils/localStorage';
 const SavedMovies = () => {
     // const userDataLength = Object.keys(userData).length;
     
-    const {loading, data} = useQuery(GET_ME);
-    const [removeMovie, {error}] = useMutation(REMOVE_MOVIE);
+    const {data} = useQuery(GET_ME);
+    const [removeMovie] = useMutation(REMOVE_MOVIE);
 
     const userData = data?.me || [];
 
@@ -32,6 +32,8 @@ const SavedMovies = () => {
         } catch (err) {
             console.error(err);
         }
+        window.location.reload();
+        return false;
     };
 
     if(!Object.keys(userData).length) {
