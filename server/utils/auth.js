@@ -5,7 +5,7 @@ const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
 module.exports = {
-  // function for our authenticated routes
+  
   authMiddleware: function({ req }) {
     let token = req.body.token || req.query.token || req.headers.authorization;
 

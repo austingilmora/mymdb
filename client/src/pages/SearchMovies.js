@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { SAVE_MOVIE } from '../utils/mutations';
@@ -128,7 +127,6 @@ const SearchMovies = () => {
                                 ) : null}
                                 <Card.Body>
                                     <Card.Title>{movie.title}</Card.Title>
-                                    <p className='small'>id: {movie.movieId}</p>
                                     <p className='small'>Rating: {movie.rating} /10</p>
                                     <p className='small'>Votes: {movie.votes}</p>
                                     <p className='small'>Description: {movie.overview}</p>
