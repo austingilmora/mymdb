@@ -14,9 +14,8 @@
 
 ## Future-Development
   To continue to develop this application I plan to do the following:
-    * Fix the delete bug - When deleting a movie from your list, it causes the page to crash and need to be reloaded. I plan to fix this problem so it only re-renders within React
-    * Add Genres/Search by Genre - The genre is is currently accessible in the card, but I haven't linked the genres to their genre ids, I plan to accomplish that in future development, 
-      and also allow for a search function by genre, so that users can find new movies they want to see.
+* Fix the delete bug - When deleting a movie from your list, it causes the page to crash and need to be reloaded. I plan to fix this problem so it only re-renders within React
+* Add Genres/Search by Genre - The genre is is currently accessible in the card, but I haven't linked the genres to their genre ids, I plan to accomplish that in future development, and also allow for a search function by genre, so that users can find new movies they want to see.
   
 ## Installation
   To download my app, all you have to do is grab the necessary files from my repository and run 'npm install' three times: once in the project folder, once in the client folder, and finally in the server folder. Then you have all you need to continue adding functionality to this app. Otherwise, this app can be viewed at https://mymdbexample.herokuapp.com/
