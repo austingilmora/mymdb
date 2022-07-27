@@ -26,9 +26,18 @@
 If you want to experience the deployed app, it is deployed at https://mymdbexample.herokuapp.com/. 
 A screenshot of the deployed app can be seen here:
 
-
+Search: 
 ![screencapture-mymdbexample-herokuapp-2022-07-27-15_51_56](https://user-images.githubusercontent.com/90655310/181360025-20ec825a-480d-40b6-93ed-0f8e8ae546b2.png)
 
+Saved Movies:
+![screencapture-mymdbexample-herokuapp-saved-2022-07-27-16_00_47](https://user-images.githubusercontent.com/90655310/181361502-89469c22-d71f-4ef5-b17b-aabfedad6e7f.png)
+
+Login:
+![screencapture-mymdbexample-herokuapp-2022-07-27-15_59_04](https://user-images.githubusercontent.com/90655310/181361295-6a01998e-7ff8-4b87-9eab-cce3a2474bef.png)
+
+
+Signup:
+![screencapture-mymdbexample-herokuapp-2022-07-27-15_59_11](https://user-images.githubusercontent.com/90655310/181361306-ffdc3889-9c25-4b69-81d8-9d9c7ba3791e.png)
 
   
 ## Questions
